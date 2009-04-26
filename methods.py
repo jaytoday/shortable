@@ -1,15 +1,6 @@
 """
 
-API Methods
-
-As of March 17 2009, the two implemented API methods are a fuzzy
-legislator name search and zip by zip code.
-
-Please register an API key and replace the API_KEY with your new key value. 
-Register at http://services.sunlightlabs.com/api/register/
-
-You can get more info about the API methods at 
-http://wiki.sunlightlabs.com/Sunlight_API_Documentation
+Methods
 
 
 """
@@ -17,11 +8,12 @@ import logging
 from google.appengine.api import urlfetch
 from google.appengine.ext import db
 import urllib
+from utils import simplejson
 
 TINYURL_URL = 'http://tinyurl.com/api-create.php?'
 BITLY_URL = 'http://api.bit.ly/shorten?'
-BITLY_API_KEY = 'R_4296f0c6d367ada06653899e848f31db'
-BITLY_LOGIN = 'jamtoday'
+BITLY_API_KEY = 'R_4296f0c6d367ada06653899e848f31db' # replace this with your key
+BITLY_LOGIN = 'jamtoday' # replace this with your login
 TRIM_URL = 'http://api.tr.im/api/trim_url.json?'
 ISGD_URL = 'http://is.gd/api.php?'
 
@@ -50,7 +42,7 @@ class ShortLinks():
 	from google.appengine.api import urlfetch
 	fetch_page = urlfetch.fetch(url = BITLY_URL + self.formatted_args,
 								method = urlfetch.GET)
-	response = eval(fetch_page.content) # um, this is a bad idea in real life
+	response = simplejson.loads(fetch_page.content) # um, this is a bad idea in real life
 	return response['results'][self.url]['shortUrl']
 
 
@@ -61,7 +53,7 @@ class ShortLinks():
 	fetch_page = urlfetch.fetch(url = TRIM_URL + self.formatted_args,
 								method = urlfetch.GET)
 
-	response = eval(fetch_page.content) # um, this is a bad idea in real life
+	response = simplejson.loads(fetch_page.content) # um, this is a bad idea in real life
 	return response['url'].replace('\\/','\\' )
 
 

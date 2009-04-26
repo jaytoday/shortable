@@ -20,7 +20,7 @@ class Shortable(webapp.RequestHandler):
 
   shortables = {}
   def get(self):
-    if not self.request.get('url'): return self.response.out.write( "dude where's your url?" )
+    if not self.request.get('url'): return self.response.out.write( "dude, where's your url?" )
     # check for cached response would go here
     this_url = self.resolve_url( self.request.get('url') )
     from methods import ShortLinks
@@ -33,7 +33,7 @@ class Shortable(webapp.RequestHandler):
     except: pass
     try: self.shortables['isgd'] = get_links.isgd()
     except: pass
-    import simplejson
+    from utils import simplejson
     self.response.out.write(simplejson.dumps(self.shortables) )	    
 
   def resolve_url(self, url):
