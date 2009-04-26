@@ -93,9 +93,7 @@ def memoize(key, time=1000000):
         def wrapper(*args, **kwargs):
             from google.appengine.api import memcache
             data = memcache.get(key)
-            print ""
-            print data
-          #  if Debug(): return fxn(*args, **kwargs) # not active in dev mode - could this be cause of production expires problem?
+            if Debug(): return fxn(*args, **kwargs) # not active in dev mode - could this be cause of production expires problem?
             if data is not None:
                 return data
             data = fxn(*args, **kwargs)
