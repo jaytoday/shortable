@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="/static/stylesheets/main.css" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+
+<script type="text/javascript" src="/static/scripts/jquery-1.3.2.js"></script> 
+<script type="text/javascript">{% include "signup.js" %}</script> 
+
+{% block head %}{% endblock head %}
+<title>Shortable</title>
+
+</head>
+
+<body>
+
+<div id="masthead"></div>
+
+<div id="main">
+
+<div id="contain">     
+<div id="content">
+<div class="title"> <h1>
+<a href="/">{% block title %} 
+
+
+{% endblock title %} </a>
+
+
+</h1></div> 
+<div id="meta"> 
+
+
+
+{% block link %}
+
+{% endblock link %}
+
+
+
+<div id="panels" class="autopagerize_page_element">
+
+
+
+
+
+<div class="panel" style="padding-bottom:0px;">
+
+<div class="panelop"> <div class="pheadfill style4">&nbsp;</div></div>
+
+<div class="panelcontent" > <div class="thecontent">
+<div class="innercontent">
+
+
+
+
+<div class="main">
+
+{% block main %}
+
+
+<div class="appspanel">
+
+
+
+
+<div class="namepanel">
+
+
+
+<div class="bluebackground"> <h2><a>What Shortable Is</a></h2>  </div>
+
+<div style="padding-top:5px; width: 248px;">
+	So, you have a URL. 
+	
+	
+<br/><br/>  And you want to get its short url addresses from <a>tinyurl</a>, <a>bit.ly</a>, <a>tr.im</a>, <a>is.gd</a>, etc.
+</div>
+<br/> 
+<div class="footnote"><a href="http://jamtoday.org">jamtoday.org</a> | <a href="http://appengine.google.com">app engine</a> | <a href="http://github.com/jamslevy/shortable/tree/master">source code</a></div>
+
+
+</div><div class="zippanel">
+
+
+
+<div class="bluebackground"> <h2><a >How Shortable Works</a></h2> </div>
+
+
+<div style="width:340px; margin-left: -20px;"><a href='http://shortable.appspot.com/shortable?url=http://en.wikipedia.org/wiki/Dog_and_pony_show'>http://shortable.appspot.com/shortable?url=http://en.wikipedia.org/wiki/Dog_and_pony_show</a><br/><br/>
+The response is a JSON object containing short links for the specified URL.  </div><br/>
+
+
+</div>
+
+
+</div>
+
+{% endblock main %}
+
+</div>
+
+
+</div> </div></div></div></div>
+
+
+
+
+
+
+
+
+
+
+{% block body %}
+{% endblock body %}
+
+
+</body>
+</html>
