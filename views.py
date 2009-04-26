@@ -3,7 +3,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-
+URL_SERVICES = ['tinyurl', 'bitly', 'trim', 'isgd', 'cligs']
 
 class MainPage(webapp.RequestHandler):
 
@@ -18,23 +18,17 @@ class MainPage(webapp.RequestHandler):
 
 class Shortable(webapp.RequestHandler):
 
-  shortables = {}
   def get(self):
     if not self.request.get('url'): return self.response.out.write( "dude, where's your url?" )
     # check for cached response would go here
     this_url = self.resolve_url( self.request.get('url') )
     from methods import ShortLinks
     get_links = ShortLinks(this_url)
-    try: self.shortables['tiny_url'] = get_links.tinyurl()
-    except: pass
-    try: self.shortables['bitly'] = get_links.bitly()
-    except: pass
-    try: self.shortables['trim'] = get_links.trim()
-    except: pass
-    try: self.shortables['isgd'] = get_links.isgd()
-    except: pass
-    from utils import simplejson
-    self.response.out.write(simplejson.dumps(self.shortables) )	    
+    for service in URL_SERVICES: 
+        try: get_links.getlink(service)
+        except: pass 
+
+    self.response.out.write(get_links.write_response())	    
 
   def resolve_url(self, url):
     from google.appengine.api import urlfetch
